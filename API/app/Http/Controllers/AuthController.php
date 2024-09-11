@@ -5,28 +5,28 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
-class AuthController extends Controller
-{
-    public function login(Request $request)
+
+    class AuthController extends Controller
     {
-        // Validar los datos recibidos
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required'
-        ]);
-
-        // Buscar el usuario por correo electrónico
-        $user = User::where('email', $request->email)->first();
-
-        // Verificar que el usuario existe y la contraseña es correcta
-        if (!$user || !Hash::check($request->password, $user->password)) {
-            return response()->json(['error' => 'Credenciales inválidas'], 401);
+        public function login(Request $request)
+        {
+            $request->validate([
+                'email' => 'required|email',
+                'password' => 'required'
+            ]);
+    
+            $user = User::where('email', $request->email)->first();
+    
+            if (!$user || !Hash::check($request->password, $user->password)) {
+                return response()->json(['error' => 'Credenciales inválidas'], 401);
+            }
+    
+            $token = $user->createToken('token-name')->plainTextToken;
+    
+            return response()->json(['token' => $token]);
         }
-
-        // Crear un token simple (esto es solo para demostración)
-        $token = 'fake-jwt-token'; // Esto sería reemplazado por un token JWT real
-
-        return response()->json(['token' => $token]);
     }
-}
+    
+

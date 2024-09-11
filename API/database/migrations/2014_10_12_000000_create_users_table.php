@@ -30,7 +30,10 @@ class CreateUsersTable extends Migration
      * @return void
      */
     public function down()
-    {
-        Schema::dropIfExists('users');
-    }
+{
+    // Eliminar cualquier tabla que dependa de 'users' antes de eliminar 'users'
+    Schema::dropIfExists('blogs'); // Eliminar blogs primero
+    Schema::dropIfExists('users');
+}
+
 }

@@ -168,8 +168,7 @@ return [
     |
     */
 
-    'secure' => env('SESSION_SECURE_COOKIE'),
-
+    'secure' => env('SESSION_SECURE_COOKIE', false), // Cambiar a true si usas HTTPS
     /*
     |--------------------------------------------------------------------------
     | HTTP Access Only
@@ -196,6 +195,6 @@ return [
     |
     */
 
-    'same_site' => 'lax',
+    'same_site' => 'none',
 
 ];
