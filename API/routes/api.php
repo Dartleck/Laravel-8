@@ -7,7 +7,11 @@ use App\Http\Controllers\BlogController;
 
 
 Route::post('/login', [AuthController::class, 'login']);
-
+Route::post('/logout', function (Request $request) {
+    $request->user()->tokens()->delete(); // Elimina todos los tokens de usuario
+    return response()->json(['message' => 'Logged out successfully']);
+  });
+  
 
 Route::middleware('auth:sanctum')->group(function () {
     
@@ -19,7 +23,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    \Log::info('Usuario autenticado:', ['user' => $request->user()]);
     return $request->user();
 });
+
 
