@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
+use Laravel\Sanctum\Sanctum; // Asegúrate de que Sanctum está importado correctamente
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -25,6 +26,7 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        // Si no tienes un modelo personalizado, puedes eliminar o comentar esta línea:
+        // Sanctum::usePersonalAccessTokenModel(PersonalAccessToken::class);
     }
 }

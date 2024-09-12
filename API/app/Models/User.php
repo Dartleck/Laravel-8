@@ -41,4 +41,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Relación: Un usuario puede tener muchos blogs.
+     */
+    public function blogs()
+    {
+        return $this->hasMany(Blog::class);
+    }
 }
