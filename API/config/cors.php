@@ -19,13 +19,13 @@ return [
     
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['http://localhost:3000'], // Aquí debes permitir el dominio del frontend
+    'allowed_origins' => ['http://localhost:3000', 'http://127.0.0.1:3000'],
 
     'allowed_origins_patterns' => [],
 
     'allowed_headers' => ['*'],
 
-    'exposed_headers' => false,
+    'exposed_headers' => ['Authorization', 'X-Requested-With'],
     
     'max_age' => 0,
 
